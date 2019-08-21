@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ex1;
+using System;
 using System.Linq;
 
 namespace Ex2
@@ -12,27 +13,22 @@ namespace Ex2
             //Вывести на консоль их как целые числа.
 
             var rnd = new Random();
-            var n = 100;
+            const int countOfFractions = 100;
             const int maxValue = 100;
 
-            var fractions = new Fraction[n];
+            var fractions = new Fraction[countOfFractions];
 
-            for (var i = 0; i < n; i++)
+            for (var i = 0; i < countOfFractions; i++)
             {
                 fractions[i] = new Fraction(rnd.Next(-maxValue, maxValue), rnd.Next(1, maxValue));
-                Console.WriteLine(fractions[i]);
             }
 
+            Console.WriteLine("Созданная коллекция случайных дробей");
+            fractions.WriteToConsole();
+
             Console.WriteLine();
-
-            var integersFromFractions = fractions.Where(f => f.X % f.Y == 0).Select(f => f.X / f.Y);
-
-            Console.WriteLine("Результат:");
-            if (integersFromFractions.Any())
-                foreach (var i in integersFromFractions)
-                    Console.WriteLine(i);
-            else
-                Console.WriteLine("Нет целых чисел в последовательности дробей");
+            Console.WriteLine("Целые числа из этой коллекции:");
+            fractions.Where(x => x.X % x.Y == 0).Select(x => x.X / x.Y).OrderBy(x => x).ToArray().WriteToConsole();
         }
     }
 }

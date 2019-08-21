@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Ex2
+﻿namespace Ex2
 {
     public class Fraction
     {

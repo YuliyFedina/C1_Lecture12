@@ -5,9 +5,16 @@ namespace Ex1
 {
     public static class MasExtension
     {
-        public static void OutputMas(this int[] mas)
+        public static void WriteToConsole<T>(this T[] array)
         {
-            foreach (var item in mas) Console.WriteLine(item);
+            if (array.Length != 0)
+            {
+                foreach (var item in array) Console.WriteLine(item);
+            }
+            else
+            {
+                Console.WriteLine("Коллекция не содержит элементов");
+            }
         }
     }
 
@@ -21,16 +28,13 @@ namespace Ex1
 
             var array = new int[10];
             var rnd = new Random();
-            for (var i = 0; i < array.Length; i++) array[i] = rnd.Next(10);
+            for (var i = 0; i < array.Length; i++) array[i] = rnd.Next(100);
             Console.WriteLine("Созданный массив:");
-            array.OutputMas();
+            array.WriteToConsole();
 
             Console.WriteLine();
-
-            var filteredArray = array.Where(x => x > 5 || x % 2 == 0)
-                .OrderByDescending(x => x);
-
-            foreach (var item in filteredArray) Console.WriteLine(item);
+            Console.WriteLine("Отсортированный массив:");
+            array.Where(x => x > 5 || x % 2 == 0).OrderByDescending(x => x).ToArray().WriteToConsole();
         }
     }
 }
